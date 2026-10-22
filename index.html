@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مصروفي</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="مصروفي">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#2563eb">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#f6f7f9;--card:#fff;--ink:#101828;--mute:#667085;--line:#eaecf0;--acc:#2563eb;--accInk:#fff;--ok:#12b76a;--bad:#f04438;--bar:#e4e7ec;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic",Tahoma,system-ui,sans-serif;line-height:1.6}
+main{max-width:520px;margin:0 auto;padding:16px 14px 40px}
+.card{background:var(--card);border:0;border-radius:16px;padding:18px;margin-bottom:12px;box-shadow:0 1px 2px rgba(16,24,40,.06)}
+h2{font-size:15px;margin:0 0 12px;font-weight:700}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:18px;cursor:pointer}
+.nav .d{text-align:center;font-weight:700}
+.nav .d small{display:block;color:var(--mute);font-weight:400;font-size:12px}
+.nav .d a{color:var(--acc);font-size:12px;cursor:pointer;font-weight:500}
+.hero{display:flex;align-items:center;gap:16px}
+.ring{position:relative;width:128px;height:128px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring .t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;color:var(--mute)}
+.ring .t b{font-size:24px;color:var(--ink);line-height:1.1}
+.hero .info{flex:1;font-size:14px}
+.hero .info div{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed var(--line)}
+.hero .info div:last-child{border:0}
+.pos{color:var(--ok);font-weight:700}.neg{color:var(--bad);font-weight:700}
+label{font-size:12px;color:var(--mute);display:block;margin-bottom:4px}
+input{width:100%;font:inherit;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+input:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.amt{font-size:22px;font-weight:700;text-align:center}
+.ils{display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px dashed var(--line);border-radius:12px;font-size:12px;color:var(--mute);padding:4px}
+.ils b{font-size:20px;color:var(--ink);line-height:1.2}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:13px;cursor:pointer}
+.chip.on{background:var(--acc);border-color:var(--acc);color:var(--accInk);font-weight:700}
+.gap{margin-top:10px}
+.add{width:100%;margin-top:12px;padding:13px;border:0;border-radius:12px;background:var(--acc);color:var(--accInk);font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+.row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.row.go{cursor:pointer}
+.row .ic{width:38px;height:38px;border-radius:12px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.row .m{flex:1;min-width:0}
+.row .m b{display:block;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .m span{font-size:12px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.row .p{font-weight:700;text-align:left;font-size:14px}
+.row .p small{display:block;font-weight:400;color:var(--mute);font-size:12px}
+.row .x{border:0;background:none;color:var(--mute);font-size:18px;cursor:pointer;padding:6px}
+.row.on{background:color-mix(in srgb,var(--acc) 14%,transparent);border-radius:10px;padding-inline:8px}
+.empty{color:var(--mute);text-align:center;padding:14px 0;font-size:14px}
+.week{display:flex;align-items:flex-end;gap:6px;height:120px}
+.week button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;border:0;background:none;color:var(--mute);font:inherit;font-size:11px;cursor:pointer;padding:0}
+.week i{display:block;width:100%;border-radius:8px 8px 3px 3px;background:var(--bar);min-height:3px}
+.week button.on i{background:var(--acc)}
+.week button.on{color:var(--ink);font-weight:700}
+.week em{font-style:normal;font-size:10px;margin-bottom:3px}
+.cat{margin-bottom:10px;font-size:13px}
+.cat .h{display:flex;justify-content:space-between;margin-bottom:3px;gap:8px}
+.cat .b{height:8px;border-radius:6px;background:var(--bg);overflow:hidden}
+.cat .b i{display:block;height:100%;background:var(--acc);border-radius:6px}
+.sum{display:flex;justify-content:space-between;font-size:14px;margin-bottom:10px}
+.note{font-size:12px;color:var(--mute);margin:8px 0 0}
+.ghost{background:none;border:1px solid var(--line);color:var(--mute);border-radius:10px;padding:8px 12px;font:inherit;font-size:13px;cursor:pointer;margin-top:12px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <div class="nav">
+    <button id="next" aria-label="اليوم التالي">›</button>
+    <div class="d"><span id="dl"></span><small id="ds"></small><a id="tod" hidden>العودة إلى اليوم</a></div>
+    <button id="prev" aria-label="اليوم السابق">‹</button>
+  </div>
+
+  <section class="card hero">
+    <div class="ring">
+      <svg width="128" height="128" viewBox="0 0 128 128"><circle cx="64" cy="64" r="54" fill="none" stroke="var(--bar)" stroke-width="12"/><circle id="arc" cx="64" cy="64" r="54" fill="none" stroke="var(--acc)" stroke-width="12" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="339.3" style="transition:stroke-dashoffset .5s"/></svg>
+      <div class="t"><span>مصروف اليوم</span><b id="tot">0</b><span>دينار</span></div>
+    </div>
+    <div class="info">
+      <div><span>بالشيكل</span><b id="totS"></b></div>
+      <div><span>ميزانية اليوم</span><b id="bud"></b></div>
+      <div><span>المتبقي</span><span id="rem"></span></div>
+      <div><span>عدد العمليات</span><b id="cnt">0</b></div>
+      <div><span>💵 كاش / 💳 فيزا</span><b id="pm"></b></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>إضافة مصروف</h2>
+    <div class="pair">
+      <div><label for="amt">المبلغ بالدينار</label><input id="amt" class="amt" type="number" inputmode="decimal" min="0" step="any" placeholder="0.000"></div>
+      <div><label>يعادل بالشيكل</label><div class="ils"><b id="ilsv">0</b><span>₪</span></div></div>
+    </div>
+    <div class="gap"><label for="dt">التاريخ</label><input id="dt" type="date"></div>
+    <div class="gap"><label>طريقة الدفع</label><div class="chips" id="pays" role="group" aria-label="طريقة الدفع" style="margin:4px 0 0"><button type="button" class="chip on" data-p="cash">💵 كاش</button><button type="button" class="chip" data-p="visa">💳 فيزا</button></div></div>
+    <div class="chips" id="chips" role="group" aria-label="على ماذا صرفت؟"></div>
+    <div id="othw" hidden><label for="oth">على ماذا صرفت؟ (اكتبها بنفسك)</label><input id="oth" type="text" maxlength="40" placeholder="مثال: هدية لصديق"></div>
+    <div class="gap"><label for="note">ملاحظة (اختياري)</label><input id="note" type="text" maxlength="60"></div>
+    <button class="add" id="add">إضافة</button>
+  </section>
+
+  <section class="card">
+    <h2>مصروفات هذا اليوم</h2>
+    <div id="list"></div>
+  </section>
+
+  <section class="card">
+    <h2>آخر 7 أيام</h2>
+    <div class="week" id="week"></div>
+  </section>
+
+  <section class="card">
+    <h2>هذا الشهر</h2>
+    <div class="sum"><span>الإجمالي</span><b id="mt"></b></div>
+    <div class="sum"><span>متوسط اليوم</span><b id="ma"></b></div>
+    <div class="sum"><span>💵 كاش</span><b id="mc"></b></div>
+    <div class="sum"><span>💳 فيزا</span><b id="mv"></b></div>
+    <div id="cats"></div>
+  </section>
+
+  <section class="card">
+    <h2>السجل حسب التاريخ</h2>
+    <div id="hist"></div>
+  </section>
+
+  <section class="card">
+    <h2>الإعدادات</h2>
+    <div class="pair">
+      <div><label for="sb">الميزانية اليومية (دينار)</label><input id="sb" type="number" inputmode="decimal" min="0" step="any"></div>
+      <div><label for="sr">1 دينار = كم شيكل؟</label><input id="sr" type="number" inputmode="decimal" min="0" step="any"></div>
+    </div>
+    <p class="note">لا يمكن لهذه الصفحة جلب سعر الصرف مباشرة من الإنترنت، لذلك السعر الافتراضي تقريبي (حوالي 4.3 شيكل لكل دينار). عدّله حسب السعر الحالي في تطبيق البنك أو الصرّاف، والتحويل في كل الصفحة يتحدّث فورًا.</p>
+    <p class="note">النسخة الاحتياطية: احفظ نسخة في ملفاتك حتى لا تضيع مصروفاتك لو مُسحت بيانات المتصفح.</p>
+    <button class="ghost" id="bke">حفظ نسخة احتياطية</button>
+    <button class="ghost" id="bki">استعادة نسخة</button>
+    <input type="file" id="bkf" accept=".json,application/json" hidden>
+    <p class="note" id="bks"></p>
+    <button class="ghost" id="clr">مسح كل البيانات</button>
+  </section>
+</main>
+
+<script>
+const CATS=[["food","🍽️","طعام وشراب"],["transport","🚌","مواصلات"],["study","📚","كتب وقرطاسية"],["uni","🎓","رسوم جامعية"],["net","📱","اتصالات وإنترنت"],["fun","🎮","ترفيه"],["health","💊","صحة"],["other","✍️","أخرى"]];
+const KEY="daily-expenses-v2";
+let S={items:[],budget:5,rate:4.3};
+try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&Array.isArray(o.items))S=Object.assign(S,o)}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const iso=d=>{const z=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return z.toISOString().slice(0,10)};
+const fromIso=s=>{const[a,b,c]=s.split("-").map(Number);return new Date(a,b-1,c)};
+const todayS=iso(new Date());
+let day=todayS,cat="food",pay="cash";
+const LOC="ar-JO-u-nu-latn";
+const jd=n=>(Math.round(n*1000)/1000).toLocaleString("en-US",{maximumFractionDigits:3});
+const sk=n=>(Math.round(n*100)/100).toLocaleString("en-US",{maximumFractionDigits:2});
+const rate=()=>+S.rate>0?+S.rate:4.3;
+const sum=a=>a.reduce((s,x)=>s+x.a,0);
+const byDay=d=>S.items.filter(x=>x.d===d);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dstr=(s,o)=>fromIso(s).toLocaleDateString(LOC,o);
+const label=x=>{const c=CATS.find(k=>k[0]===x.c);return x.c==="other"&&x.o?["✍️",x.o]:c?[c[1],c[2]]:["📦","أخرى"]};
+
+function render(){
+  $("dl").textContent=day===todayS?"اليوم":dstr(day,{weekday:"long"});
+  $("ds").textContent=dstr(day,{day:"numeric",month:"long",year:"numeric"});
+  $("tod").hidden=day===todayS;
+  $("next").disabled=day>=todayS;$("next").style.opacity=day>=todayS?.35:1;
+  const items=byDay(day),t=sum(items),b=+S.budget||0;
+  $("tot").textContent=jd(t);$("totS").textContent=sk(t*rate())+" ₪";
+  $("bud").textContent=b?jd(b)+" د":"غير محددة";
+  const left=b-t;
+  $("rem").innerHTML=b?`<span class="${left>=0?"pos":"neg"}">${left>=0?jd(left)+" د":"تجاوزت بـ "+jd(-left)+" د"}</span>`:"—";
+  $("cnt").textContent=items.length;
+  const pc=sum(items.filter(x=>x.p!=="visa")),pv=t-pc;$("pm").textContent=jd(pc)+" / "+jd(pv);
+  const arc=$("arc");
+  arc.style.strokeDashoffset=339.3*(1-(b?Math.min(t/b,1):0));
+  arc.style.stroke=b&&t>b?"var(--bad)":"var(--acc)";
+  $("list").innerHTML=items.length?items.slice().reverse().map(x=>{const l=label(x);
+    return `<div class="row"><div class="ic">${l[0]}</div><div class="m"><b>${esc(l[1])}</b><span>${x.p==="visa"?"💳 فيزا":"💵 كاش"}${x.n?" · "+esc(x.n):""}</span></div><div class="p">${jd(x.a)} د<small>${sk(x.a*rate())} ₪</small></div><button class="x" data-id="${x.id}" aria-label="حذف">✕</button></div>`}).join(""):`<div class="empty">لا توجد مصروفات في هذا اليوم. أضف أول مصروف من الأعلى.</div>`;
+  // week
+  const days=[];for(let i=6;i>=0;i--){const d=fromIso(todayS);d.setDate(d.getDate()-i);days.push(iso(d))}
+  const tots=days.map(d=>sum(byDay(d))),mx=Math.max(...tots,.001);
+  $("week").innerHTML=days.map((d,i)=>`<button data-d="${d}" class="${d===day?"on":""}"><em>${tots[i]?jd(tots[i]):""}</em><i style="height:${Math.max(tots[i]/mx*84,3)}px"></i><span>${dstr(d,{weekday:"short"})}</span></button>`).join("");
+  // month
+  const ym=day.slice(0,7),mi=S.items.filter(x=>x.d.startsWith(ym)),mt=sum(mi);
+  const last=ym===todayS.slice(0,7)?+todayS.slice(8):new Date(+ym.slice(0,4),+ym.slice(5),0).getDate();
+  $("mt").textContent=jd(mt)+" د  ≈ "+sk(mt*rate())+" ₪";
+  $("ma").textContent=jd(mt/last)+" د  ≈ "+sk(mt/last*rate())+" ₪";
+  const mcv=sum(mi.filter(x=>x.p!=="visa"));$("mc").textContent=jd(mcv)+" د  ≈ "+sk(mcv*rate())+" ₪";$("mv").textContent=jd(mt-mcv)+" د  ≈ "+sk((mt-mcv)*rate())+" ₪";
+  const g={};mi.forEach(x=>{const l=label(x),k=l[0]+" "+l[1].trim();g[k]=(g[k]||0)+x.a});
+  const cs=Object.entries(g).sort((a,b)=>b[1]-a[1]);
+  $("cats").innerHTML=cs.length?cs.map(([k,v])=>`<div class="cat"><div class="h"><span>${esc(k)}</span><b>${jd(v)} د (${Math.round(v/mt*100)}%)</b></div><div class="b"><i style="width:${v/mt*100}%"></i></div></div>`).join(""):`<div class="empty">لا توجد بيانات لهذا الشهر بعد.</div>`;
+  // history
+  const hd={};S.items.forEach(x=>{(hd[x.d]=hd[x.d]||[]).push(x)});
+  const ds=Object.keys(hd).sort().reverse().slice(0,60);
+  $("hist").innerHTML=ds.length?ds.map(d=>`<div class="row go${d===day?" on":""}" data-d="${d}"><div class="m"><b>${dstr(d,{weekday:"long",day:"numeric",month:"long",year:"numeric"})}</b><span>${hd[d].length} عملية</span></div><div class="p">${jd(sum(hd[d]))} د<small>${sk(sum(hd[d])*rate())} ₪</small></div></div>`).join(""):`<div class="empty">سيظهر هنا سجل أيامك بعد إضافة أول مصروف.</div>`;
+}
+function setDay(d){day=d;$("dt").value=d;render()}
+function preview(){const a=parseFloat($("amt").value);$("ilsv").textContent=a>0?sk(a*rate()):"0"}
+
+$("chips").innerHTML=CATS.map(c=>`<button type="button" class="chip${c[0]===cat?" on":""}" data-c="${c[0]}">${c[1]} ${c[2]}</button>`).join("");
+$("chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;cat=b.dataset.c;[...$("chips").children].forEach(x=>x.classList.toggle("on",x===b));$("othw").hidden=cat!=="other";if(cat==="other")$("oth").focus()};
+$("pays").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;pay=b.dataset.p;[...$("pays").children].forEach(x=>x.classList.toggle("on",x===b))};
+function add(){
+  const a=parseFloat($("amt").value);
+  if(!(a>0)){$("amt").focus();return}
+  const o=$("oth").value.trim();
+  if(cat==="other"&&!o){$("oth").focus();return}
+  let d=$("dt").value||day;if(d>todayS)d=todayS;
+  S.items.push({id:Date.now()+Math.random().toString(36).slice(2,6),d:d,a:a,c:cat,o:cat==="other"?o:"",p:pay,n:$("note").value.trim()});
+  $("amt").value="";$("note").value="";$("oth").value="";preview();save();setDay(d);$("amt").focus();
+}
+$("add").onclick=add;
+$("amt").oninput=preview;
+$("amt").onkeydown=$("note").onkeydown=$("oth").onkeydown=e=>{if(e.key==="Enter")add()};
+$("dt").max=todayS;$("dt").value=day;
+$("dt").onchange=e=>{if(e.target.value)setDay(e.target.value>todayS?todayS:e.target.value)};
+$("list").onclick=e=>{const b=e.target.closest(".x");if(!b)return;S.items=S.items.filter(x=>x.id!==b.dataset.id);save();render()};
+$("week").onclick=e=>{const b=e.target.closest("button");if(b)setDay(b.dataset.d)};
+$("hist").onclick=e=>{const r=e.target.closest(".row");if(r){setDay(r.dataset.d);window.scrollTo({top:0,behavior:"smooth"})}};
+const shift=n=>{const d=fromIso(day);d.setDate(d.getDate()+n);const s=iso(d);if(s<=todayS)setDay(s)};
+$("prev").onclick=()=>shift(-1);$("next").onclick=()=>shift(1);
+$("tod").onclick=()=>setDay(todayS);
+$("sb").value=S.budget;$("sr").value=S.rate;
+$("sb").oninput=e=>{S.budget=parseFloat(e.target.value)||0;save();render()};
+$("sr").oninput=e=>{S.rate=parseFloat(e.target.value)||4.3;save();render();preview()};
+$("clr").onclick=()=>{if(confirm("سيتم حذف كل المصروفات نهائيًا. متابعة؟")){S.items=[];save();render()}};
+
+$("bke").onclick=()=>{const txt=JSON.stringify({app:"masroofi",v:1,data:S}),name="masroofi-backup.json";
+try{const f=new File([txt],name,{type:"application/json"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"نسخة مصروفي"}).catch(()=>{});return}}catch(e){}
+const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"application/json"}));a.download=name;document.body.appendChild(a);a.click();a.remove();$("bks").textContent="تم تجهيز الملف."};
+$("bki").onclick=()=>$("bkf").click();
+$("bkf").onchange=e=>{const f=e.target.files&&e.target.files[0];e.target.value="";if(!f)return;const r=new FileReader();
+r.onload=()=>{try{const o=JSON.parse(r.result),d=o&&o.data;if(!d||!Array.isArray(d.items))throw 0;
+if(!confirm("سيتم استبدال البيانات الحالية بالنسخة. متأكد؟"))return;
+S=Object.assign({items:[],budget:5,rate:4.3},d);S.items=S.items.filter(x=>x&&typeof x.d==="string"&&x.a>0);
+save();$("sb").value=S.budget;$("sr").value=S.rate;render();$("bks").textContent="تمت الاستعادة."}catch(err){$("bks").textContent="الملف غير صالح."}};r.readAsText(f)};
+if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{})})}
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+render();
+</script>
+</body>
+</html>
